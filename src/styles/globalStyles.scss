@@ -1,0 +1,28 @@
+@import "exports.module";
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap");
+
+html {
+	/* GLOBAL STYLING */
+	* {
+		padding: 0;
+		margin: 0;
+		//! debugg ghost elements
+		// background: #000 !important;
+		// color: #0f0 !important;
+		// outline: solid #f00 1px !important;
+	}
+
+	*:focus {
+		outline: 0;
+	}
+
+	a {
+		text-decoration: none;
+	}
+
+	/* BODY STYLING */
+	body {
+		font-family: "Ubuntu", sans-serif !important;
+		background: $background;
+	}
+}
