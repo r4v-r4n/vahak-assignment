@@ -1,5 +1,5 @@
-@import "exports.module";
-@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap");
+@import 'exports.module';
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500&display=swap');
 
 html {
 	/* GLOBAL STYLING */
@@ -16,13 +16,9 @@ html {
 		outline: 0;
 	}
 
-	a {
-		text-decoration: none;
-	}
-
 	/* BODY STYLING */
 	body {
-		font-family: "Ubuntu", sans-serif !important;
+		font-family: 'Ubuntu', sans-serif !important;
 		background: $background;
 	}
 }
