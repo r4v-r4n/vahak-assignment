@@ -26,7 +26,7 @@ const Form = () => {
 	};
 	return (
 		<Container maxWidth='sm'>
-			<Box mt={4}>{stepperFunction(activeStepNumber)}</Box>
+			<Box my={4}>{stepperFunction(activeStepNumber)}</Box>
 		</Container>
 	);
 };
