@@ -4,9 +4,12 @@ import MuiSelect from './MuiSelect';
 
 type FormikControlType = {
 	control: string;
+	InputProps?: {};
 	inputProps?: {};
 	name: string;
-	label: string;
+	label?: string;
+	variant?: 'outlined' | 'filled' | 'standard';
+
 	type?: string;
 	disabled?: boolean;
 	options?: Array<{ key: string; value: string }>;

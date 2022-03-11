@@ -3,7 +3,7 @@ import { Field, FieldProps } from 'formik';
 
 type MuiCheckboxProps = {
 	name: string;
-	label: string;
+	label?: string;
 };
 
 const MuiCheckbox = (props: MuiCheckboxProps) => {

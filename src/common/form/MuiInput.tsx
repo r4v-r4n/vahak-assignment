@@ -3,13 +3,13 @@ import { Field, FieldProps } from 'formik';
 
 type MuiInputProps = {
 	name: string;
-	inputProps?: any;
-	label: string;
+	label?: string;
 	disabled?: boolean;
+	variant?: 'outlined' | 'filled' | 'standard';
 };
 
 const MuiInput = (props: MuiInputProps) => {
-	const { name, label, ...rest } = props;
+	const { name, variant, label, ...rest } = props;
 
 	return (
 		<Field name={name}>
@@ -17,7 +17,7 @@ const MuiInput = (props: MuiInputProps) => {
 				<Box my={1}>
 					<TextField
 						id={name}
-						variant='outlined'
+						variant={variant ? variant : 'outlined'}
 						size='small'
 						fullWidth
 						label={label}

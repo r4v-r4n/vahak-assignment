@@ -3,7 +3,7 @@ import { Field, FieldProps } from 'formik';
 
 type MuiSelectProps = {
 	name: string;
-	label: string;
+	label?: string;
 	disabled?: boolean;
 	options?: Array<{ key: string; value: string }>;
 };
