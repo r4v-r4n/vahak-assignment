@@ -1,4 +1,4 @@
-import { Container } from '@mui/material';
+import { Box, Container } from '@mui/material';
 import { useAppSelector } from 'store';
 import { appDataInReduxStore } from 'store/app/appSlice';
 import StepFour from './forms/StepFour';
@@ -28,7 +28,11 @@ const Form = () => {
 				return <StepOne />;
 		}
 	};
-	return <Container maxWidth='sm'>{stepperFunction(activeStepNumber)}</Container>;
+	return (
+		<Container maxWidth='sm'>
+			<Box mt={4}>{stepperFunction(activeStepNumber)}</Box>
+		</Container>
+	);
 };
 
 export default Form;

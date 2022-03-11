@@ -39,7 +39,7 @@ const StepOne = () => {
 	};
 
 	return (
-		<Box mt={4}>
+		<Box  >
 			<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 				{() => (
 					<Form>
