@@ -3,7 +3,7 @@ import { Edit } from 'assets';
 import { FormikControl } from 'common';
 import { Form, Formik } from 'formik';
 import { useAppDispatch, useAppSelector } from 'store';
-import { appDataInReduxStore } from 'store/app/appSlice';
+import { appDataInReduxStore, incrementStep } from 'store/app/appSlice';
 import * as yup from 'yup';
 import BidDetails from '../details/BidDetails';
 import JourneyDetails from '../details/JourneyDetails';
@@ -34,13 +34,13 @@ const StepThree = () => {
 
 	const onSubmit = (values: Values) => {
 		console.log(values);
+		dispatch(incrementStep());
 	};
 
 	const { bidDetails } = useAppSelector(appDataInReduxStore);
 	const { mobile } = bidDetails;
 	return (
-		<div>
-			{' '}
+		<>
 			<JourneyDetails />
 			<BidDetails />
 			<Typography variant='subtitle1'>
@@ -55,11 +55,12 @@ const StepThree = () => {
 						onSubmit={onSubmit}>
 						{() => (
 							<Form>
-								<Grid container>
+								<Grid container spacing={2} justifyContent='center'>
 									<Grid item xs={2}>
 										<FormikControl
 											control='muiInput'
-											name='firstDigit'	variant='standard'
+											name='firstDigit'
+											variant='standard'
 											inputProps={{
 												maxLength: 1,
 											}}
@@ -68,7 +69,8 @@ const StepThree = () => {
 									<Grid item xs={2}>
 										<FormikControl
 											control='muiInput'
-											name='secondDigit' 	variant='standard'
+											name='secondDigit'
+											variant='standard'
 											inputProps={{
 												maxLength: 1,
 											}}
@@ -76,7 +78,8 @@ const StepThree = () => {
 									</Grid>
 									<Grid item xs={2}>
 										<FormikControl
-											control='muiInput' 	variant='standard'
+											control='muiInput'
+											variant='standard'
 											name='thirdDigit'
 											inputProps={{
 												maxLength: 1,
@@ -86,7 +89,8 @@ const StepThree = () => {
 									<Grid item xs={2}>
 										<FormikControl
 											control='muiInput'
-											name='fourthDigit' 	variant='standard'
+											name='fourthDigit'
+											variant='standard'
 											inputProps={{
 												maxLength: 1,
 											}}
@@ -107,7 +111,7 @@ const StepThree = () => {
 					</Formik>
 				</Grid>
 			</Grid>
-		</div>
+		</>
 	);
 };
 
