@@ -1,10 +1,11 @@
-import { Box, Button, Divider, Grid, TextField, Typography } from '@mui/material';
-import { Edit, Rupee } from 'assets';
-import { Formik, Form } from 'formik';
+import { Box, Button, Divider, Grid, InputAdornment, TextField } from '@mui/material';
+import { Rupee } from 'assets';
 import { FormikControl } from 'common';
+import JourneyDetails from '../details/JourneyDetails';
+import { Form, Formik } from 'formik';
 import { useState } from 'react';
-import { useAppDispatch, useAppSelector } from 'store';
-import { appDataInReduxStore, bidDetailsReducer } from 'store/app/appSlice';
+import { useAppDispatch } from 'store';
+import { bidDetailsReducer, incrementStep } from 'store/app/appSlice';
 import * as yup from 'yup';
 
 type Values = {
@@ -16,9 +17,6 @@ type Values = {
 
 const StepTwo = () => {
 	const dispatch = useAppDispatch();
-
-	const { journeyDetails } = useAppSelector(appDataInReduxStore);
-	const { source, destination, travellers, carType } = journeyDetails;
 
 	const [price, setPrice] = useState('');
 
@@ -32,41 +30,36 @@ const StepTwo = () => {
 	};
 
 	const validationSchema = yup.object({
-		mobile: yup.string().required('Mobile number is required'),
+		mobile: yup.number().typeError('Must be a number').required('Mobile number is required'),
 		name: yup.string().required('Name is required'),
 		remarks: yup.string(),
 	});
 
 	const onSubmit = (values: Values) => {
 		dispatch(bidDetailsReducer(values));
+		dispatch(incrementStep());
 	};
 
 	return (
 		<>
-			<Grid container spacing={3}>
-				<Grid item xs={8}>
-					<Typography variant='caption' color={'GrayText'}>
-						JOURNEY DETAILS
-					</Typography>
-				</Grid>
-				<Grid item xs={3}>
-					<Button startIcon={<Edit />}>Edit</Button>
-				</Grid>
-			</Grid>
-			<Typography variant='subtitle1'>
-				{source}/MH - {destination}/TN
-			</Typography>
-			<Typography variant='subtitle1'>
-				{travellers} Persons, {carType}
-			</Typography>
-			<Divider sx={{ my: 5 }} />
-			<Rupee />{' '}
+			<JourneyDetails />
+
 			<TextField
+				fullWidth
 				placeholder='0'
-				label='Price'
 				value={price}
 				onChange={(e) => setPrice(e.target.value)}
+				InputProps={{
+					startAdornment: (
+						<InputAdornment position='start'>
+							<Rupee />{' '}
+						</InputAdornment>
+					),
+					disableUnderline: true,
+				}}
+				inputProps={{ maxLength: 10 }}
 				disabled={hasPriceBeenConfirmed}
+				variant='standard'
 			/>
 			{!hasPriceBeenConfirmed ? (
 				<Button
@@ -91,6 +84,9 @@ const StepTwo = () => {
 											control='muiInput'
 											name='mobile'
 											label='Enter your 10 digit mobile number *'
+											InputProps={{
+												startAdornment: <InputAdornment position='start'>+91-</InputAdornment>,
+											}}
 											inputProps={{ maxLength: 10 }}
 										/>
 									</Grid>
