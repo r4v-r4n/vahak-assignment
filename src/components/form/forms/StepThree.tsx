@@ -7,13 +7,7 @@ import { appDataInReduxStore, incrementStep } from 'store/app/appSlice';
 import * as yup from 'yup';
 import BidDetails from '../details/BidDetails';
 import JourneyDetails from '../details/JourneyDetails';
-
-type Values = {
-	firstDigit: string;
-	secondDigit: string;
-	thirdDigit: string;
-	fourthDigit: string;
-};
+import { StepThreeValueTypes } from '../FormTypes';
 
 const StepThree = () => {
 	const dispatch = useAppDispatch();
@@ -32,8 +26,7 @@ const StepThree = () => {
 		fourthDigit: yup.number().required('Required'),
 	});
 
-	const onSubmit = (values: Values) => {
-		console.log(values);
+	const onSubmit = (values: StepThreeValueTypes) => {
 		dispatch(incrementStep());
 	};
 

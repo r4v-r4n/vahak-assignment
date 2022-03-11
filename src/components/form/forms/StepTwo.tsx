@@ -7,13 +7,7 @@ import { useState } from 'react';
 import { useAppDispatch } from 'store';
 import { bidDetailsReducer, incrementStep } from 'store/app/appSlice';
 import * as yup from 'yup';
-
-type Values = {
-	price: string;
-	mobile: string;
-	name: string;
-	remarks: string;
-};
+import { StepTwoValueTypes } from '../FormTypes';
 
 const StepTwo = () => {
 	const dispatch = useAppDispatch();
@@ -35,7 +29,7 @@ const StepTwo = () => {
 		remarks: yup.string(),
 	});
 
-	const onSubmit = (values: Values) => {
+	const onSubmit = (values: StepTwoValueTypes) => {
 		dispatch(bidDetailsReducer(values));
 		dispatch(incrementStep());
 	};

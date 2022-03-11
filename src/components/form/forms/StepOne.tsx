@@ -4,16 +4,11 @@ import { Form, Formik } from 'formik';
 import { useAppDispatch } from 'store';
 import { incrementStep, journeyDetailsReducer } from 'store/app/appSlice';
 import * as yup from 'yup';
-
-type Values = {
-	source: string;
-	destination: string;
-	travellers: string;
-	carType: string;
-};
+import { StepOneValueTypes } from '../FormTypes';
 
 const StepOne = () => {
 	const dispatch = useAppDispatch();
+
 	const carTypeOptions = [
 		{ key: 'HatchBack', value: 'HatchBack' },
 		{ key: 'Sedan', value: 'Sedan' },
@@ -33,7 +28,7 @@ const StepOne = () => {
 		carType: yup.string().required('Car Type is required'),
 		travellers: yup.number().typeError('Must be a number'),
 	});
-	const onSubmit = (values: Values) => {
+	const onSubmit = (values: StepOneValueTypes) => {
 		dispatch(journeyDetailsReducer(values));
 		dispatch(incrementStep());
 	};
@@ -63,7 +58,7 @@ const StepOne = () => {
 								control='muiInput'
 								name='travellers'
 								label='Number of Travellers'
-								inputProps={{ maxLength: 10 }}
+								inputProps={{ maxLength: 1 }}
 							/>
 						</Grid>
 					</Grid>
