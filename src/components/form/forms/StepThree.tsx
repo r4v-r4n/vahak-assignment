@@ -3,11 +3,11 @@ import { Edit } from 'assets';
 import { FormikControl } from 'common';
 import { Form, Formik } from 'formik';
 import { useAppDispatch, useAppSelector } from 'store';
-import { appDataInReduxStore, incrementStep } from 'store/app/appSlice';
+import { appDataInReduxStore, stepReducer } from 'store/app/appSlice';
 import * as yup from 'yup';
 import BidDetails from '../details/BidDetails';
 import JourneyDetails from '../details/JourneyDetails';
-import { StepThreeValueTypes } from '../FormTypes';
+import { OtpTypes } from '../FormTypes';
 
 const StepThree = () => {
 	const dispatch = useAppDispatch();
@@ -26,8 +26,8 @@ const StepThree = () => {
 		fourthDigit: yup.number().required('Required'),
 	});
 
-	const onSubmit = (values: StepThreeValueTypes) => {
-		dispatch(incrementStep());
+	const onSubmit = (values: OtpTypes) => {
+		dispatch(stepReducer({ stepNumber: 4, message: 'Summary & Submit Bid' }));
 	};
 
 	const { bidDetails } = useAppSelector(appDataInReduxStore);

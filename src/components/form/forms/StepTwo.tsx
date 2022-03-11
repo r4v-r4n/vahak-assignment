@@ -5,9 +5,9 @@ import JourneyDetails from '../details/JourneyDetails';
 import { Form, Formik } from 'formik';
 import { useState } from 'react';
 import { useAppDispatch } from 'store';
-import { bidDetailsReducer, incrementStep } from 'store/app/appSlice';
+import { bidDetailsReducer, stepReducer } from 'store/app/appSlice';
 import * as yup from 'yup';
-import { StepTwoValueTypes } from '../FormTypes';
+import { BidDetailsTypes } from '../FormTypes';
 
 const StepTwo = () => {
 	const dispatch = useAppDispatch();
@@ -29,9 +29,9 @@ const StepTwo = () => {
 		remarks: yup.string(),
 	});
 
-	const onSubmit = (values: StepTwoValueTypes) => {
+	const onSubmit = (values: BidDetailsTypes) => {
 		dispatch(bidDetailsReducer(values));
-		dispatch(incrementStep());
+		dispatch(stepReducer({stepNumber: 3,message:'Verify otp'}));
 	};
 
 	return (

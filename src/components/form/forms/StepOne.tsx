@@ -1,19 +1,16 @@
 import { Box, Button, Grid } from '@mui/material';
 import { FormikControl } from 'common';
+import { carTypeOptions } from 'constants/Constants';
 import { Form, Formik } from 'formik';
 import { useAppDispatch } from 'store';
-import { incrementStep, journeyDetailsReducer } from 'store/app/appSlice';
+import { stepReducer, journeyDetailsReducer } from 'store/app/appSlice';
+import { regexForOtherCarTypes, regexForSuv } from 'utils/regex';
 import * as yup from 'yup';
-import { StepOneValueTypes } from '../FormTypes';
+import { JourneyDetailsTypes } from '../FormTypes';
 
 const StepOne = () => {
 	const dispatch = useAppDispatch();
-
-	const carTypeOptions = [
-		{ key: 'HatchBack', value: 'HatchBack' },
-		{ key: 'Sedan', value: 'Sedan' },
-		{ key: 'SUV', value: 'SUV' },
-	];
+	let carTypeSelected = '';
 
 	const initialValues = {
 		source: '',
@@ -26,49 +23,68 @@ const StepOne = () => {
 		source: yup.string().required('Source location is required'),
 		destination: yup.string().required('Destination is required'),
 		carType: yup.string().required('Car Type is required'),
-		travellers: yup.number().typeError('Must be a number'),
+		travellers: yup.string().test(
+			'make-sure-passenger-count-is-valid', // name of the test
+			`Must be and number and between ${carTypeSelected === 'SUV' ? '1-6' : '1-4'}`, //message to display when test fails
+			(value = '') => {
+				const isTravellerCountValid =
+					carTypeSelected === 'SUV' ? regexForSuv.test(value) : regexForOtherCarTypes.test(value);
+				if (!isTravellerCountValid) return false;
+				return true;
+			}
+		),
 	});
-	const onSubmit = (values: StepOneValueTypes) => {
+
+	const onSubmit = (values: JourneyDetailsTypes) => {
+		/* storing values of this form in redux and sending user to step two of the form */
 		dispatch(journeyDetailsReducer(values));
-		dispatch(incrementStep());
+		dispatch(stepReducer({ stepNumber: 2, message: 'Place your Bid' }));
 	};
 
 	return (
 		<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-			{() => (
-				<Form>
-					<Grid container spacing={2}>
-						<Grid item xs={12} sm={6}>
-							<FormikControl control='muiInput' name='source' label='Source Location *' />
-						</Grid>
-						<Grid item xs={12} sm={6}>
-							<FormikControl control='muiInput' name='destination' label='Destination *' />
+			{(form) => {
+				/*
+				Setting car type selected by user in component for conditionally rendering error message and for swapping regex
+				// TODO: refactor this
+				 */
+				carTypeSelected = form.values.carType;
+				return (
+					<Form>
+						<Grid container spacing={2}>
+							<Grid item xs={12} sm={6}>
+								<FormikControl control='muiInput' name='source' label='Source Location *' />
+							</Grid>
+							<Grid item xs={12} sm={6}>
+								<FormikControl control='muiInput' name='destination' label='Destination *' />
+							</Grid>
+
+							<Grid item xs={12}>
+								<FormikControl
+									control='muiSelect'
+									name='carType'
+									label='Enter Car type *'
+									options={carTypeOptions}
+								/>
+							</Grid>
+							<Grid item xs={12}>
+								<FormikControl
+									control='muiInput'
+									name='travellers'
+									label='Number of Travellers'
+									inputProps={{ maxLength: 1 }}
+								/>
+							</Grid>
 						</Grid>
 
-						<Grid item xs={12}>
-							<FormikControl
-								control='muiSelect'
-								name='carType'
-								label='Enter Car type *'
-								options={carTypeOptions}
-							/>
-						</Grid>
-						<Grid item xs={12}>
-							<FormikControl
-								control='muiInput'
-								name='travellers'
-								label='Number of Travellers'
-								inputProps={{ maxLength: 1 }}
-							/>
-						</Grid>
-					</Grid>
-					<Box my={3} mx={2}>
-						<Button variant='contained' color='primary' type='submit' fullWidth>
-							Enter Bid Details
-						</Button>
-					</Box>
-				</Form>
-			)}
+						<Box my={3} mx={2}>
+							<Button variant='contained' color='primary' type='submit' fullWidth>
+								Enter Bid Details
+							</Button>
+						</Box>
+					</Form>
+				);
+			}}
 		</Formik>
 	);
 };
