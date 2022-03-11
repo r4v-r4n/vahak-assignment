@@ -39,44 +39,42 @@ const StepOne = () => {
 	};
 
 	return (
-		<Box>
-			<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
-				{() => (
-					<Form>
-						<Grid container spacing={2}>
-							<Grid item xs={12} sm={6}>
-								<FormikControl control='muiInput' name='source' label='Source Location *' />
-							</Grid>
-							<Grid item xs={12} sm={6}>
-								<FormikControl control='muiInput' name='destination' label='Destination *' />
-							</Grid>
-
-							<Grid item xs={12}>
-								<FormikControl
-									control='muiSelect'
-									name='carType'
-									label='Enter Car type *'
-									options={carTypeOptions}
-								/>
-							</Grid>
-							<Grid item xs={12}>
-								<FormikControl
-									control='muiInput'
-									name='travellers'
-									label='Number of Travellers'
-									inputProps={{ maxLength: 10 }}
-								/>
-							</Grid>
+		<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+			{() => (
+				<Form>
+					<Grid container spacing={2}>
+						<Grid item xs={12} sm={6}>
+							<FormikControl control='muiInput' name='source' label='Source Location *' />
 						</Grid>
-						<Box my={3} mx={2}>
-							<Button variant='contained' color='primary' type='submit' fullWidth>
-								Enter Bid Details
-							</Button>
-						</Box>
-					</Form>
-				)}
-			</Formik>
-		</Box>
+						<Grid item xs={12} sm={6}>
+							<FormikControl control='muiInput' name='destination' label='Destination *' />
+						</Grid>
+
+						<Grid item xs={12}>
+							<FormikControl
+								control='muiSelect'
+								name='carType'
+								label='Enter Car type *'
+								options={carTypeOptions}
+							/>
+						</Grid>
+						<Grid item xs={12}>
+							<FormikControl
+								control='muiInput'
+								name='travellers'
+								label='Number of Travellers'
+								inputProps={{ maxLength: 10 }}
+							/>
+						</Grid>
+					</Grid>
+					<Box my={3} mx={2}>
+						<Button variant='contained' color='primary' type='submit' fullWidth>
+							Enter Bid Details
+						</Button>
+					</Box>
+				</Form>
+			)}
+		</Formik>
 	);
 };
 
