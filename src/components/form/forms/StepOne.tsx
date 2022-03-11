@@ -6,7 +6,7 @@ import { incrementStep, journeyDetailsReducer } from 'store/app/appSlice';
 import * as yup from 'yup';
 
 type Values = {
-	sourceLocation: string;
+	source: string;
 	destination: string;
 	travellers: string;
 	carType: string;
@@ -15,20 +15,20 @@ type Values = {
 const StepOne = () => {
 	const dispatch = useAppDispatch();
 	const carTypeOptions = [
-		{ key: 'hatchBack', value: 'HatchBack' },
-		{ key: 'sedan', value: 'Sedan' },
-		{ key: 'suv', value: 'SUV' },
+		{ key: 'HatchBack', value: 'HatchBack' },
+		{ key: 'Sedan', value: 'Sedan' },
+		{ key: 'SUV', value: 'SUV' },
 	];
 
 	const initialValues = {
-		sourceLocation: '',
+		source: '',
 		destination: '',
 		travellers: '',
 		carType: '',
 	};
 
 	const validationSchema = yup.object({
-		sourceLocation: yup.string().required('Source location is required'),
+		source: yup.string().required('Source location is required'),
 		destination: yup.string().required('Destination is required'),
 		carType: yup.string().required('Car Type is required'),
 		travellers: yup.number().typeError('Must be a number'),
@@ -39,13 +39,13 @@ const StepOne = () => {
 	};
 
 	return (
-		<Box  >
+		<Box>
 			<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
 				{() => (
 					<Form>
 						<Grid container spacing={2}>
 							<Grid item xs={12} sm={6}>
-								<FormikControl control='muiInput' name='sourceLocation' label='Source Location *' />
+								<FormikControl control='muiInput' name='source' label='Source Location *' />
 							</Grid>
 							<Grid item xs={12} sm={6}>
 								<FormikControl control='muiInput' name='destination' label='Destination *' />

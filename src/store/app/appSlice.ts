@@ -6,10 +6,16 @@ type InitialState = {
 	step: string;
 	activeStepNumber: number;
 	journeyDetails: {
-		sourceLocation: string;
+		source: string;
 		destination: string;
 		travellers: string;
 		carType: string;
+	};
+	bidDetails: {
+		name: string;
+		mobile: string;
+		price: string;
+		remarks: string;
 	};
 };
 
@@ -17,7 +23,8 @@ const initialState: InitialState = {
 	status: 'idle',
 	activeStepNumber: 0,
 	step: 'Place your bid (1/4 Step)',
-	journeyDetails: { sourceLocation: '', destination: '', travellers: '', carType: '' },
+	journeyDetails: { source: '', destination: '', travellers: '', carType: '' },
+	bidDetails: { name: '', mobile: '', price: '', remarks: '' },
 };
 
 export const appSlice = createSlice({
@@ -40,11 +47,15 @@ export const appSlice = createSlice({
 		journeyDetailsReducer: (state, action) => {
 			state.journeyDetails = action.payload;
 		},
+
+		bidDetailsReducer: (state, action) => {
+			state.bidDetails = action.payload;
+		},
 	},
 });
 
 // exporting reducer so that we can dispatch this in desired page(s) which then will trigger associated action with the reducer
-export const { stepReducer, journeyDetailsReducer,incrementStep,decrementStep } = appSlice.actions;
+export const { stepReducer, journeyDetailsReducer,incrementStep,decrementStep,bidDetailsReducer } = appSlice.actions;
 
 // exporting the app data object for consumption by page(s)
 export const appDataInReduxStore = (state: RootState) => state.app;
