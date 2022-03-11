@@ -4,8 +4,9 @@ import MuiSelect from './MuiSelect';
 
 type FormikControlType = {
 	control: string;
-
+	required?: boolean;
 	name: string;
+	label: string;
 	type?: string;
 	disabled?: boolean;
 	options?: Array<{ key: string; value: string }>;
