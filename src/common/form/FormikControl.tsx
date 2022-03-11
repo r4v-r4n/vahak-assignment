@@ -4,7 +4,7 @@ import MuiSelect from './MuiSelect';
 
 type FormikControlType = {
 	control: string;
-	required?: boolean;
+	inputProps?: {};
 	name: string;
 	label: string;
 	type?: string;
