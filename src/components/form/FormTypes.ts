@@ -1,18 +1,18 @@
-export type StepOneValueTypes = {
+export type JourneyDetailsTypes = {
 	source: string;
 	destination: string;
 	travellers: string;
 	carType: string;
 };
 
-export type StepTwoValueTypes = {
+export type BidDetailsTypes = {
 	price: string;
 	mobile: string;
 	name: string;
 	remarks: string;
 };
 
-export type StepThreeValueTypes = {
+export type OtpTypes = {
 	firstDigit: string;
 	secondDigit: string;
 	thirdDigit: string;
