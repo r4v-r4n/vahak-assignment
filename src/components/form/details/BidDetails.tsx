@@ -1,16 +1,13 @@
 import { Divider, Grid, Typography } from '@mui/material';
 import { Rupee } from 'assets';
-import { useAppDispatch, useAppSelector } from 'store';
+import { useAppSelector } from 'store';
 import { appDataInReduxStore } from 'store/app/appSlice';
 
 const BidDetails = () => {
-	const dispatch = useAppDispatch();
-
 	const { bidDetails } = useAppSelector(appDataInReduxStore);
 	const { mobile, name, price, remarks } = bidDetails;
 	return (
-		<div>
-			{' '}
+		<>
 			<Grid container>
 				<Grid item xs={12}>
 					<Typography variant='caption' color={'GrayText'}>
@@ -38,7 +35,7 @@ const BidDetails = () => {
 				</Grid>
 			</Grid>
 			<Divider sx={{ my: 5 }} />
-		</div>
+		</>
 	);
 };
 
