@@ -7,26 +7,27 @@ import StepThree from './forms/StepThree';
 import StepTwo from './forms/StepTwo';
 
 const Form = () => {
-	const { activeStepNumber } = useAppSelector(appDataInReduxStore);
+	const { step } = useAppSelector(appDataInReduxStore);
 
+	/* Based on which step of form user is at we switch form */
 	const stepperFunction = (key: number) => {
 		switch (key) {
 			case 1:
-				return <StepTwo />;
-
+				return <StepOne />;
 			case 2:
-				return <StepThree />;
-
+				return <StepTwo />;
 			case 3:
+				return <StepThree />;
+			case 4:
 				return <StepFour />;
-
 			default:
 				return <StepOne />;
 		}
 	};
+
 	return (
 		<Container maxWidth='sm'>
-			<Box my={4}>{stepperFunction(activeStepNumber)}</Box>
+			<Box my={4}>{stepperFunction(step?.stepNumber)}</Box>
 		</Container>
 	);
 };
