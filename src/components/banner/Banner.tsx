@@ -7,7 +7,9 @@ const Banner = () => {
 	const { step } = useAppSelector(appDataInReduxStore);
 	return (
 		<Box className='banner' display={'flex'} alignItems={'center'} justifyContent={'center'}>
-			<Typography variant='h4'>{step}</Typography>
+			<Typography variant='h4'>
+				{step.message}({step.stepNumber}/4 step)
+			</Typography>
 		</Box>
 	);
 };
