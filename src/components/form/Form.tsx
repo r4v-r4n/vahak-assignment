@@ -4,8 +4,7 @@ import { appDataInReduxStore } from 'store/app/appSlice';
 import StepFour from './forms/StepFour';
 import StepOne from './forms/StepOne';
 import StepThree from './forms/StepThree';
-import StepTwoPartOne from './forms/StepTwoPartOne';
-import StepTwoPartTwo from './forms/StepTwoPartTwo';
+import StepTwo from './forms/StepTwo';
 
 const Form = () => {
 	const { activeStepNumber } = useAppSelector(appDataInReduxStore);
@@ -13,15 +12,12 @@ const Form = () => {
 	const stepperFunction = (key: number) => {
 		switch (key) {
 			case 1:
-				return <StepTwoPartOne />;
+				return <StepTwo />;
 
 			case 2:
-				return <StepTwoPartTwo />;
-
-			case 3:
 				return <StepThree />;
 
-			case 4:
+			case 3:
 				return <StepFour />;
 
 			default:
