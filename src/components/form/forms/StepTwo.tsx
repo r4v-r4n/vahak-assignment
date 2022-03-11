@@ -31,7 +31,7 @@ const StepTwo = () => {
 
 	const onSubmit = (values: BidDetailsTypes) => {
 		dispatch(bidDetailsReducer(values));
-		dispatch(stepReducer({stepNumber: 3,message:'Verify otp'}));
+		dispatch(stepReducer({ stepNumber: 3, message: 'Verify OTP' }));
 	};
 
 	return (
