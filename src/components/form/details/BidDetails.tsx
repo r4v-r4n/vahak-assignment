@@ -1,9 +1,12 @@
 import { Divider, Grid, Typography } from '@mui/material';
 import { Rupee } from 'assets';
+import useFormatter from 'hooks/useFormatter';
 import { useAppSelector } from 'store';
 import { appDataInReduxStore } from 'store/app/appSlice';
 
 const BidDetails = () => {
+	const { formatPrice } = useFormatter();
+
 	const { bidDetails } = useAppSelector(appDataInReduxStore);
 	const { mobile, name, price, remarks } = bidDetails;
 	return (
@@ -23,9 +26,7 @@ const BidDetails = () => {
 				</Grid>
 				<Grid item xs={4}>
 					<Grid item xs={12} container justifyContent={'center'} alignItems='center'>
-						<Typography variant='h5'>
-							<Rupee /> {price}
-						</Typography>
+						<Typography variant='h4'>{formatPrice(price)}</Typography>
 					</Grid>
 					<Grid item xs={12} container justifyContent={'center'}>
 						<Typography variant='caption' color={'GrayText'}>
