@@ -1,5 +1,4 @@
 import { Divider, Grid, Typography } from '@mui/material';
-import { Rupee } from 'assets';
 import useFormatter from 'hooks/useFormatter';
 import { useAppSelector } from 'store';
 import { appDataInReduxStore } from 'store/app/appSlice';
