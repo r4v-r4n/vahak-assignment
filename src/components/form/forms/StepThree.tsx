@@ -11,7 +11,10 @@ import { OtpTypes } from '../FormTypes';
 
 const StepThree = () => {
 	const validOtp = 1234;
-
+	const otpInputProps = {
+		maxLength: 1,
+		style: { fontSize: 50, textAlign: 'center' },
+	};
 	const dispatch = useAppDispatch();
 
 	const initialValues = {
@@ -61,9 +64,7 @@ const StepThree = () => {
 											control='muiInput'
 											name='firstDigit'
 											variant='standard'
-											inputProps={{
-												maxLength: 1,
-											}}
+											inputProps={otpInputProps}
 										/>
 									</Grid>
 									<Grid item xs={2}>
@@ -71,9 +72,7 @@ const StepThree = () => {
 											control='muiInput'
 											name='secondDigit'
 											variant='standard'
-											inputProps={{
-												maxLength: 1,
-											}}
+											inputProps={otpInputProps}
 										/>
 									</Grid>
 									<Grid item xs={2}>
@@ -81,9 +80,7 @@ const StepThree = () => {
 											control='muiInput'
 											variant='standard'
 											name='thirdDigit'
-											inputProps={{
-												maxLength: 1,
-											}}
+											inputProps={otpInputProps}
 										/>
 									</Grid>
 									<Grid item xs={2}>
@@ -91,9 +88,7 @@ const StepThree = () => {
 											control='muiInput'
 											name='fourthDigit'
 											variant='standard'
-											inputProps={{
-												maxLength: 1,
-											}}
+											inputProps={otpInputProps}
 										/>
 									</Grid>
 								</Grid>
