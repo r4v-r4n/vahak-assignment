@@ -13,7 +13,7 @@ const initialState: InitialState = {
 	status: 'idle',
 	step: {
 		stepNumber: 1,
-		message: 'Place your bid ',
+		message: 'Place your Bid',
 	},
 	journeyDetails: { source: '', destination: '', travellers: '', carType: '' },
 	bidDetails: { name: '', mobile: '', price: '', remarks: '' },
