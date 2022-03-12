@@ -17,6 +17,8 @@ const StepThree = () => {
 	};
 	const dispatch = useAppDispatch();
 
+	const otpFields = ['firstDigit', 'secondDigit', 'thirdDigit', 'fourthDigit'];
+
 	const initialValues = {
 		firstDigit: '',
 		secondDigit: '',
@@ -59,38 +61,18 @@ const StepThree = () => {
 						{() => (
 							<Form>
 								<Grid container spacing={2} justifyContent='center'>
-									<Grid item xs={2}>
-										<FormikControl
-											control='muiInput'
-											name='firstDigit'
-											variant='standard'
-											inputProps={otpInputProps}
-										/>
-									</Grid>
-									<Grid item xs={2}>
-										<FormikControl
-											control='muiInput'
-											name='secondDigit'
-											variant='standard'
-											inputProps={otpInputProps}
-										/>
-									</Grid>
-									<Grid item xs={2}>
-										<FormikControl
-											control='muiInput'
-											variant='standard'
-											name='thirdDigit'
-											inputProps={otpInputProps}
-										/>
-									</Grid>
-									<Grid item xs={2}>
-										<FormikControl
-											control='muiInput'
-											name='fourthDigit'
-											variant='standard'
-											inputProps={otpInputProps}
-										/>
-									</Grid>
+									{otpFields.map((field, index) => {
+										return (
+											<Grid item xs={2} key={index}>
+												<FormikControl
+													control='muiInput'
+													name={field}
+													variant='standard'
+													inputProps={otpInputProps}
+												/>
+											</Grid>
+										);
+									})}
 								</Grid>
 
 								<Box my={3} mx={2} display='flex' alignItems='center' flexDirection='column'>
