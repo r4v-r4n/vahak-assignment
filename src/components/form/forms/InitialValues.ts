@@ -4,3 +4,11 @@ export const initialJourneyDetails = {
 	travellers: '',
 	carType: '',
 };
+
+export const initialBidDetails = {
+	price: '',
+	mobile: '',
+	name: '',
+	remarks: '',
+	isRateNegotiable: false,
+};

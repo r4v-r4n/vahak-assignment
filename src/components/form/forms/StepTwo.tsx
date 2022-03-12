@@ -2,25 +2,19 @@ import { Box, Button, Divider, Grid, InputAdornment } from '@mui/material';
 import { FormikControl } from 'common';
 import { Form, Formik } from 'formik';
 import { useState } from 'react';
-import { useAppDispatch } from 'store';
-import { bidDetailsReducer, stepReducer } from 'store/app/appSlice';
+import { useAppDispatch, useAppSelector } from 'store';
+import { appDataInReduxStore, bidDetailsReducer, stepReducer } from 'store/app/appSlice';
 import { mobileRegex, nameRegex } from 'utils/regex';
 import * as yup from 'yup';
 import JourneyDetails from '../details/JourneyDetails';
 import { BidDetailsTypes } from '../FormTypes';
+import { initialBidDetails } from './InitialValues';
 
 const StepTwo = () => {
 	const dispatch = useAppDispatch();
+	const { bidDetails } = useAppSelector(appDataInReduxStore);
 
 	const [hasPriceBeenConfirmed, setHasPriceBeenConfirmed] = useState(false);
-
-	const initialValues = {
-		price: '',
-		mobile: '',
-		name: '',
-		remarks: '',
-		isRateNegotiable: false,
-	};
 
 	const validationSchema = yup.object({
 		price: yup.string().required('please enter Bid amount'),
@@ -55,16 +49,17 @@ const StepTwo = () => {
 
 			<>
 				<Formik
-					initialValues={initialValues}
+					initialValues={bidDetails || initialBidDetails}
 					validationSchema={validationSchema}
-					onSubmit={onSubmit}>
+					onSubmit={onSubmit}
+					enableReinitialize>
 					{(form) => {
-						let disableNextButton = form.values.price.length === 0;
+						let disableNextButton = form.values.price === '';
 						return (
 							<Form>
 								<Grid container>
 									<Grid item xs={12}>
-										<FormikControl control='muiPriceField' name='price' />
+										<FormikControl control='muiPriceField' name='price'  />
 									</Grid>
 									<Grid item xs={12} container justifyContent={'center'}>
 										<FormikControl
