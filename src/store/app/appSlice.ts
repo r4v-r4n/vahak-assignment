@@ -16,7 +16,7 @@ const initialState: InitialState = {
 		message: 'Place your Bid',
 	},
 	journeyDetails: { source: '', destination: '', travellers: '', carType: '' },
-	bidDetails: { name: '', mobile: '', price: '', remarks: '' },
+	bidDetails: { name: '', mobile: '', price: '', remarks: '', isRateNegotiable: false, getUpdates: false },
 };
 
 export const appSlice = createSlice({

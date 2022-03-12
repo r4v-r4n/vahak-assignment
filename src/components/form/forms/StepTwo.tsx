@@ -96,7 +96,7 @@ const StepTwo = () => {
 											<Grid item xs={12}>
 												<FormikControl
 													control='muiCheckbox'
-													name='sendUpdatesOnWhatsApp'
+													name='getUpdates'
 													label='Get updates on whatsapp'
 												/>
 											</Grid>

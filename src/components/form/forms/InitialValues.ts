@@ -10,6 +10,6 @@ export const initialBidDetails = {
 	mobile: '',
 	name: '',
 	remarks: '',
-	isRateNegotiable: false,
-	sendUpdatesOnWhatsApp: false,
+	isRateNegotiable: true,
+	getUpdates: true,
 };

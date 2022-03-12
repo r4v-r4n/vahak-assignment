@@ -10,6 +10,8 @@ export type BidDetailsTypes = {
 	mobile: string;
 	name: string;
 	remarks: string;
+	isRateNegotiable: boolean;
+	getUpdates: boolean;
 };
 
 export type OtpTypes = {
