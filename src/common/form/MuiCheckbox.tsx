@@ -13,15 +13,19 @@ const MuiCheckbox = (props: MuiCheckboxProps) => {
 			<FormControlLabel
 				control={
 					<Field name={name}>
-						{({ field }: FieldProps) => (
-							<Checkbox
-								color='primary'
-								id={field.name}
-								checked={field.value}
-								{...field}
-								{...rest}
-							/>
-						)}
+						{({ field }: FieldProps) => {
+							console.log('🚀 ~ file: MuiCheckbox.tsx ~ line 17 ~ MuiCheckbox ~ field', field);
+
+							return (
+								<Checkbox
+									color='primary'
+									id={field.name}
+									checked={field.value}
+									{...field}
+									{...rest}
+								/>
+							);
+						}}
 					</Field>
 				}
 				label={label}
