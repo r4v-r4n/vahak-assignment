@@ -7,6 +7,7 @@ import { appDataInReduxStore, journeyDetailsReducer, stepReducer } from 'store/a
 import { regexForOtherCarTypes, regexForSuv } from 'utils/regex';
 import * as yup from 'yup';
 import { JourneyDetailsTypes } from '../FormTypes';
+import { initialJourneyDetails } from './InitialValues';
 
 const StepOne = () => {
 	const dispatch = useAppDispatch();
@@ -15,20 +16,13 @@ const StepOne = () => {
 	/* For conditionally rendering error message and regex for validating traveller count */
 	let carTypeSelected = '';
 
-	const initialValues = {
-		source: '',
-		destination: '',
-		travellers: '',
-		carType: '',
-	};
-
 	const validationSchema = yup.object({
-		source: yup.string().required('Source location is required'),
-		destination: yup.string().required('Destination is required'),
-		carType: yup.string().required('Car Type is required'),
+		source: yup.string().required('source location is required'),
+		destination: yup.string().required('destination is required'),
+		carType: yup.string().required('car type is required'),
 		travellers: yup.string().test(
 			'make-sure-passenger-count-is-valid', // name of the test
-			`Must be and number and between ${carTypeSelected === 'SUV' ? '1-6' : '1-4'}`, //message to display when test fails
+			`must be and number and between ${carTypeSelected === 'SUV' ? '1-6' : '1-4'}`, //message to display when test fails
 			(value = '') => {
 				const isTravellerCountValid =
 					carTypeSelected === 'SUV' ? regexForSuv.test(value) : regexForOtherCarTypes.test(value);
@@ -46,7 +40,7 @@ const StepOne = () => {
 
 	return (
 		<Formik
-			initialValues={journeyDetails || initialValues}
+			initialValues={journeyDetails || initialJourneyDetails}
 			validationSchema={validationSchema}
 			onSubmit={onSubmit}
 			enableReinitialize>
