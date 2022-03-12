@@ -1,12 +1,12 @@
 import { Box, Button, Divider, Grid, InputAdornment, TextField } from '@mui/material';
 import { Rupee } from 'assets';
 import { FormikControl } from 'common';
-import JourneyDetails from '../details/JourneyDetails';
 import { Form, Formik } from 'formik';
 import { useState } from 'react';
 import { useAppDispatch } from 'store';
 import { bidDetailsReducer, stepReducer } from 'store/app/appSlice';
 import * as yup from 'yup';
+import JourneyDetails from '../details/JourneyDetails';
 import { BidDetailsTypes } from '../FormTypes';
 
 const StepTwo = () => {
