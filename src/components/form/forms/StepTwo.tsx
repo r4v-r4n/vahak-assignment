@@ -5,6 +5,7 @@ import { Form, Formik } from 'formik';
 import { useState } from 'react';
 import { useAppDispatch } from 'store';
 import { bidDetailsReducer, stepReducer } from 'store/app/appSlice';
+import { mobileRegex, nameRegex } from 'utils/regex';
 import * as yup from 'yup';
 import JourneyDetails from '../details/JourneyDetails';
 import { BidDetailsTypes } from '../FormTypes';
@@ -24,8 +25,22 @@ const StepTwo = () => {
 	};
 
 	const validationSchema = yup.object({
-		mobile: yup.number().typeError('Must be a number').required('Mobile number is required'),
-		name: yup.string().required('Name is required'),
+		mobile: yup
+			.string()
+			.matches(mobileRegex, {
+				message: 'mobile number is invalid, please enter a valid 10 digit mobile number',
+				excludeEmptyString: true,
+			})
+			.required('mobile number is required'),
+
+		name: yup
+			.string()
+			.matches(nameRegex, {
+				message: 'invalid name, please enter a name with only alphabets',
+				excludeEmptyString: true,
+			})
+			.required('name is required'),
+
 		remarks: yup.string(),
 	});
 
@@ -55,6 +70,7 @@ const StepTwo = () => {
 				disabled={hasPriceBeenConfirmed}
 				variant='standard'
 			/>
+
 			{!hasPriceBeenConfirmed ? (
 				<Button
 					variant='contained'
@@ -84,6 +100,7 @@ const StepTwo = () => {
 											inputProps={{ maxLength: 10 }}
 										/>
 									</Grid>
+
 									<Grid item xs={12}>
 										<FormikControl control='muiInput' name='name' label='Enter your Name *' />
 									</Grid>
