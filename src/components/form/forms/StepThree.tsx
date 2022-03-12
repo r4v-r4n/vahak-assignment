@@ -10,6 +10,8 @@ import JourneyDetails from '../details/JourneyDetails';
 import { OtpTypes } from '../FormTypes';
 
 const StepThree = () => {
+	const validOtp = 1234;
+
 	const dispatch = useAppDispatch();
 
 	const initialValues = {
@@ -27,7 +29,12 @@ const StepThree = () => {
 	});
 
 	const onSubmit = (values: OtpTypes) => {
-		dispatch(stepReducer({ stepNumber: 4, message: 'Summary & Submit Bid' }));
+		if (
+			validOtp ===
+			Number(values.firstDigit + values.secondDigit + values.thirdDigit + values.fourthDigit)
+		) {
+			dispatch(stepReducer({ stepNumber: 4, message: 'Summary & Submit Bid' }));
+		}
 	};
 
 	const { bidDetails } = useAppSelector(appDataInReduxStore);
@@ -37,8 +44,8 @@ const StepThree = () => {
 			<JourneyDetails />
 			<BidDetails />
 			<Typography variant='subtitle1'>
-				We've sent an OTP on your mobile number, Please enter it below to submit your bid {mobile}{' '}
-				<Button startIcon={<Edit />}>Edit</Button>
+				We've sent an OTP on your mobile number, Please enter it below to submit your bid{' '}
+				<strong>{mobile}</strong> <Button startIcon={<Edit />}>Edit</Button>
 			</Typography>
 			<Grid container justifyContent={'center'}>
 				<Grid item xs={12}>
