@@ -1,4 +1,4 @@
-import { Checkbox, FormGroup, FormControlLabel, FormControlLabelProps } from '@mui/material';
+import { Checkbox, FormControlLabel, FormGroup } from '@mui/material';
 import { Field, FieldProps } from 'formik';
 
 type MuiCheckboxProps = {
