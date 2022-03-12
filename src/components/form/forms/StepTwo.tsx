@@ -23,6 +23,8 @@ const StepTwo = () => {
 	};
 
 	const validationSchema = yup.object({
+		price: yup.string().required('please enter Bid amount'),
+
 		mobile: yup
 			.string()
 			.matches(mobileRegex, {
@@ -64,7 +66,7 @@ const StepTwo = () => {
 									<Grid item xs={12}>
 										<FormikControl control='muiPriceField' name='price' />
 									</Grid>
-									<Grid item xs={12}>
+									<Grid item xs={12} container justifyContent={'center'}>
 										<FormikControl
 											control='muiCheckbox'
 											name='isRateNegotiable'
