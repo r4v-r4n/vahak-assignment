@@ -10,7 +10,6 @@ type FormikControlType = {
 	name: string;
 	label?: string;
 	variant?: 'outlined' | 'filled' | 'standard';
-
 	type?: string;
 	disabled?: boolean;
 	options?: Array<{ key: string; value: string }>;
