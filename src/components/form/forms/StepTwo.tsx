@@ -1,5 +1,4 @@
-import { Box, Button, Divider, Grid, InputAdornment, TextField } from '@mui/material';
-import { Rupee } from 'assets';
+import { Box, Button, Divider, Grid, InputAdornment } from '@mui/material';
 import { FormikControl } from 'common';
 import { Form, Formik } from 'formik';
 import { useState } from 'react';
@@ -13,15 +12,14 @@ import { BidDetailsTypes } from '../FormTypes';
 const StepTwo = () => {
 	const dispatch = useAppDispatch();
 
-	const [price, setPrice] = useState('');
-
 	const [hasPriceBeenConfirmed, setHasPriceBeenConfirmed] = useState(false);
 
 	const initialValues = {
-		price: price,
+		price: '',
 		mobile: '',
 		name: '',
 		remarks: '',
+		isRateNegotiable: false,
 	};
 
 	const validationSchema = yup.object({
@@ -53,76 +51,79 @@ const StepTwo = () => {
 		<>
 			<JourneyDetails />
 
-			<TextField
-				fullWidth
-				placeholder='0'
-				value={price}
-				onChange={(e) => setPrice(e.target.value)}
-				InputProps={{
-					startAdornment: (
-						<InputAdornment position='start'>
-							<Rupee />{' '}
-						</InputAdornment>
-					),
-					disableUnderline: true,
-				}}
-				inputProps={{ maxLength: 10 }}
-				disabled={hasPriceBeenConfirmed}
-				variant='standard'
-			/>
-
-			{!hasPriceBeenConfirmed ? (
-				<Button
-					variant='contained'
-					color='primary'
-					disabled={price.length < 1}
-					onClick={() => setHasPriceBeenConfirmed(!hasPriceBeenConfirmed)}>
-					Next
-				</Button>
-			) : (
-				<>
-					<Divider sx={{ my: 3 }} />
-					<Formik
-						initialValues={initialValues}
-						validationSchema={validationSchema}
-						onSubmit={onSubmit}>
-						{() => (
+			<>
+				<Formik
+					initialValues={initialValues}
+					validationSchema={validationSchema}
+					onSubmit={onSubmit}>
+					{(form) => {
+						let disableNextButton = form.values.price.length === 0;
+						return (
 							<Form>
 								<Grid container>
 									<Grid item xs={12}>
+										<FormikControl control='muiPriceField' name='price' />
+									</Grid>
+									<Grid item xs={12}>
 										<FormikControl
-											control='muiInput'
-											name='mobile'
-											label='Enter your 10 digit mobile number *'
-											InputProps={{
-												startAdornment: <InputAdornment position='start'>+91-</InputAdornment>,
-											}}
-											inputProps={{ maxLength: 10 }}
+											control='muiCheckbox'
+											name='isRateNegotiable'
+											label='Rate negotiable'
 										/>
 									</Grid>
 
-									<Grid item xs={12}>
-										<FormikControl control='muiInput' name='name' label='Enter your Name *' />
-									</Grid>
+									{!hasPriceBeenConfirmed ? (
+										<Button
+											variant='contained'
+											color='primary'
+											fullWidth
+											disabled={disableNextButton}
+											onClick={() => setHasPriceBeenConfirmed(!hasPriceBeenConfirmed)}>
+											Next
+										</Button>
+									) : (
+										<>
+											<Divider sx={{ my: 3 }} />
+											<Divider sx={{ my: 3 }} />
+											<Grid item xs={12}>
+												<FormikControl
+													control='muiInput'
+													name='mobile'
+													label='Enter your 10 digit mobile number *'
+													InputProps={{
+														startAdornment: <InputAdornment position='start'>+91-</InputAdornment>,
+													}}
+													inputProps={{ maxLength: 10 }}
+												/>
+											</Grid>
 
-									<Grid item xs={12}>
-										<FormikControl
-											control='muiInput'
-											name='remarks'
-											label='Enter Remarks (optional)'
-										/>
-									</Grid>
+											<Grid item xs={12}>
+												<FormikControl control='muiInput' name='name' label='Enter your Name *' />
+											</Grid>
+
+											<Grid item xs={12}>
+												<FormikControl
+													control='muiInput'
+													name='remarks'
+													label='Enter Remarks (optional)'
+												/>
+											</Grid>
+
+											<Grid item xs={12}>
+												<Box my={3} mx={2}>
+													<Button variant='contained' color='primary' type='submit' fullWidth>
+														Verify via OTP
+													</Button>
+												</Box>
+											</Grid>
+										</>
+									)}
 								</Grid>
-								<Box my={3} mx={2}>
-									<Button variant='contained' color='primary' type='submit' fullWidth>
-										Verify via OTP
-									</Button>
-								</Box>
 							</Form>
-						)}
-					</Formik>
-				</>
-			)}
+						);
+					}}
+				</Formik>
+			</>
 		</>
 	);
 };

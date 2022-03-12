@@ -1,5 +1,6 @@
 import MuiCheckbox from './MuiCheckbox';
 import MuiInput from './MuiInput';
+import MuiPriceField from './MuiPriceField';
 import MuiSelect from './MuiSelect';
 
 type FormikControlType = {
@@ -24,6 +25,8 @@ const FormikControl = (props: FormikControlType) => {
 			return <MuiSelect {...rest} />;
 		case 'muiCheckbox':
 			return <MuiCheckbox {...rest} />;
+		case 'muiPriceField':
+			return <MuiPriceField {...rest} />;
 
 		default:
 			return null;

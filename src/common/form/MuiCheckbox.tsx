@@ -1,20 +1,17 @@
-import { Checkbox, Grid } from '@mui/material';
+import { Checkbox, FormGroup, FormControlLabel, FormControlLabelProps } from '@mui/material';
 import { Field, FieldProps } from 'formik';
 
 type MuiCheckboxProps = {
 	name: string;
-	label?: string;
+	label?: string | number;
 };
 
 const MuiCheckbox = (props: MuiCheckboxProps) => {
-	const { name, label, ...rest } = props;
+	const { name, label = '', ...rest } = props;
 	return (
-		<div className='form-control'>
-			<Grid container justifyContent='space-around'>
-				<Grid container alignItems='center' item xs={4}>
-					<label>{label}</label>
-				</Grid>
-				<Grid item xs={4}>
+		<FormGroup>
+			<FormControlLabel
+				control={
 					<Field name={name}>
 						{({ field }: FieldProps) => (
 							<Checkbox
@@ -26,9 +23,10 @@ const MuiCheckbox = (props: MuiCheckboxProps) => {
 							/>
 						)}
 					</Field>
-				</Grid>
-			</Grid>
-		</div>
+				}
+				label={label}
+			/>
+		</FormGroup>
 	);
 };
 
