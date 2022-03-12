@@ -1,7 +1,6 @@
 import { Box, InputAdornment, TextField } from '@mui/material';
 import { Rupee } from 'assets';
 import { Field, FieldProps } from 'formik';
-import useFormatter from 'hooks/useFormatter';
 
 type MuiPriceFieldProps = {
 	name: string;
@@ -10,12 +9,10 @@ type MuiPriceFieldProps = {
 };
 
 const MuiPriceField = (props: MuiPriceFieldProps) => {
-	const { formatPrice } = useFormatter();
 	const { name, label, ...rest } = props;
 	return (
 		<Field name={name}>
 			{({ field, form }: FieldProps) => {
-				console.log('🚀 ~ file: MuiPriceField.tsx ~ line 44 ~ MuiPriceField ~ field', field.value);
 				return (
 					<Box my={1} display='flex' justifyContent='center'>
 						<TextField
