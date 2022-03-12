@@ -80,9 +80,8 @@ const StepTwo = () => {
 										</Button>
 									) : (
 										<>
-											<Divider sx={{ my: 3 }} />
-											<Divider sx={{ my: 3 }} />
 											<Grid item xs={12}>
+												<Divider sx={{ my: 5 }} />
 												<FormikControl
 													control='muiInput'
 													name='mobile'
