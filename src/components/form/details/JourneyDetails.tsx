@@ -1,9 +1,10 @@
 import { Button, Divider, Grid, Typography } from '@mui/material';
 import { Edit } from 'assets';
-import { useAppSelector } from 'store';
-import { appDataInReduxStore } from 'store/app/appSlice';
+import { useAppDispatch, useAppSelector } from 'store';
+import { appDataInReduxStore, stepReducer } from 'store/app/appSlice';
 
 const JourneyDetails = () => {
+	const dispatch = useAppDispatch();
 	const { journeyDetails } = useAppSelector(appDataInReduxStore);
 	const { source, destination, travellers, carType } = journeyDetails;
 	return (
@@ -15,7 +16,11 @@ const JourneyDetails = () => {
 					</Typography>
 				</Grid>
 				<Grid item xs={2}>
-					<Button startIcon={<Edit />}>Edit</Button>
+					<Button
+						startIcon={<Edit />}
+						onClick={() => dispatch(stepReducer({ stepNumber: 1, message: 'Place your Bid' }))}>
+						Edit
+					</Button>
 				</Grid>
 			</Grid>
 			<Typography variant='subtitle1'>

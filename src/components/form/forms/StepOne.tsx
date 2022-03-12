@@ -2,14 +2,17 @@ import { Box, Button, Grid } from '@mui/material';
 import { FormikControl } from 'common';
 import { carTypeOptions } from 'constants/Constants';
 import { Form, Formik } from 'formik';
-import { useAppDispatch } from 'store';
-import { stepReducer, journeyDetailsReducer } from 'store/app/appSlice';
+import { useAppDispatch, useAppSelector } from 'store';
+import { appDataInReduxStore, journeyDetailsReducer, stepReducer } from 'store/app/appSlice';
 import { regexForOtherCarTypes, regexForSuv } from 'utils/regex';
 import * as yup from 'yup';
 import { JourneyDetailsTypes } from '../FormTypes';
 
 const StepOne = () => {
 	const dispatch = useAppDispatch();
+	const { journeyDetails } = useAppSelector(appDataInReduxStore);
+
+	/* For conditionally rendering error message and regex for validating traveller count */
 	let carTypeSelected = '';
 
 	const initialValues = {
@@ -42,7 +45,11 @@ const StepOne = () => {
 	};
 
 	return (
-		<Formik initialValues={initialValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+		<Formik
+			initialValues={journeyDetails || initialValues}
+			validationSchema={validationSchema}
+			onSubmit={onSubmit}
+			enableReinitialize>
 			{(form) => {
 				/*
 				Setting car type selected by user in component for conditionally rendering error message and for swapping regex
