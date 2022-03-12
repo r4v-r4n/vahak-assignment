@@ -93,7 +93,7 @@ const StepTwo = () => {
 													inputProps={{ maxLength: 10 }}
 												/>
 											</Grid>
-											<Grid item xs={12} container justifyContent={'center'}>
+											<Grid item xs={12}>
 												<FormikControl
 													control='muiCheckbox'
 													name='sendUpdatesOnWhatsApp'
