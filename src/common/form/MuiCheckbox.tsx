@@ -14,8 +14,6 @@ const MuiCheckbox = (props: MuiCheckboxProps) => {
 				control={
 					<Field name={name}>
 						{({ field }: FieldProps) => {
-							console.log('🚀 ~ file: MuiCheckbox.tsx ~ line 17 ~ MuiCheckbox ~ field', field);
-
 							return (
 								<Checkbox
 									color='primary'
