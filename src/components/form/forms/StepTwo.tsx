@@ -59,7 +59,7 @@ const StepTwo = () => {
 							<Form>
 								<Grid container>
 									<Grid item xs={12}>
-										<FormikControl control='muiPriceField' name='price'  />
+										<FormikControl control='muiPriceField' name='price' />
 									</Grid>
 									<Grid item xs={12} container justifyContent={'center'}>
 										<FormikControl
@@ -91,6 +91,13 @@ const StepTwo = () => {
 														startAdornment: <InputAdornment position='start'>+91-</InputAdornment>,
 													}}
 													inputProps={{ maxLength: 10 }}
+												/>
+											</Grid>
+											<Grid item xs={12} container justifyContent={'center'}>
+												<FormikControl
+													control='muiCheckbox'
+													name='sendUpdatesOnWhatsApp'
+													label='Get updates on whatsapp'
 												/>
 											</Grid>
 

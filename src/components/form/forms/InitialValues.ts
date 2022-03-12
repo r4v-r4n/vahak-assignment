@@ -11,4 +11,5 @@ export const initialBidDetails = {
 	name: '',
 	remarks: '',
 	isRateNegotiable: false,
+	sendUpdatesOnWhatsApp: false,
 };
