@@ -1,5 +1,5 @@
 export const carTypeOptions = [
-	{ key: 'HatchBack', value: 'HatchBack' },
+	{ key: 'Hatchback', value: 'Hatchback' },
 	{ key: 'Sedan', value: 'Sedan' },
 	{ key: 'SUV', value: 'SUV' },
 ];
