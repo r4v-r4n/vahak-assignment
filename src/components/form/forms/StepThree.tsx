@@ -2,29 +2,31 @@ import { Box, Button, Grid, Typography } from '@mui/material';
 import { Edit } from 'assets';
 import { FormikControl } from 'common';
 import { Form, Formik } from 'formik';
+import { useEffect, useRef, useState } from 'react';
 import { useAppDispatch, useAppSelector } from 'store';
 import { appDataInReduxStore, stepReducer } from 'store/app/appSlice';
 import * as yup from 'yup';
 import BidDetails from '../details/BidDetails';
 import JourneyDetails from '../details/JourneyDetails';
 import { OtpTypes } from '../FormTypes';
+import { otpValues } from './InitialValues';
 
 const StepThree = () => {
 	const validOtp = 1234;
+
+	/* custom props for styling input fields  */
 	const otpInputProps = {
 		maxLength: 1,
 		style: { fontSize: 50, textAlign: 'center' },
 	};
+
+	const [lastDigitOfOtp, setLastDigitOfOtp] = useState('');
+
 	const dispatch = useAppDispatch();
 
-	const otpFields = ['firstDigit', 'secondDigit', 'thirdDigit', 'fourthDigit'];
+	const buttonRef = useRef<HTMLButtonElement>(null);
 
-	const initialValues = {
-		firstDigit: '',
-		secondDigit: '',
-		thirdDigit: '',
-		fourthDigit: '',
-	};
+	const otpFields = ['firstDigit', 'secondDigit', 'thirdDigit', 'fourthDigit'];
 
 	const validationSchema = yup.object().shape({
 		firstDigit: yup.number().required('Required'),
@@ -32,6 +34,12 @@ const StepThree = () => {
 		thirdDigit: yup.number().required('Required'),
 		fourthDigit: yup.number().required('Required'),
 	});
+
+	useEffect(() => {
+		if (lastDigitOfOtp) {
+			buttonRef.current?.click();
+		}
+	}, [lastDigitOfOtp]);
 
 	const onSubmit = (values: OtpTypes) => {
 		if (
@@ -54,37 +62,45 @@ const StepThree = () => {
 			</Typography>
 			<Grid container justifyContent={'center'}>
 				<Grid item xs={12}>
-					<Formik
-						initialValues={initialValues}
-						validationSchema={validationSchema}
-						onSubmit={onSubmit}>
-						{() => (
-							<Form>
-								<Grid container spacing={2} justifyContent='center'>
-									{otpFields.map((field, index) => {
-										return (
-											<Grid item xs={2} key={index}>
-												<FormikControl
-													control='muiInput'
-													name={field}
-													variant='standard'
-													inputProps={otpInputProps}
-												/>
-											</Grid>
-										);
-									})}
-								</Grid>
+					<Formik initialValues={otpValues} validationSchema={validationSchema} onSubmit={onSubmit}>
+						{(form) => {
+							console.log(form.values.fourthDigit);
+							if (form.values.fourthDigit !== '') {
+								setLastDigitOfOtp(form.values.fourthDigit);
+							}
+							return (
+								<Form>
+									<Grid container spacing={2} justifyContent='center'>
+										{otpFields.map((field, index) => {
+											return (
+												<Grid item xs={2} key={index}>
+													<FormikControl
+														control='muiInput'
+														name={field}
+														variant='standard'
+														inputProps={otpInputProps}
+													/>
+												</Grid>
+											);
+										})}
+									</Grid>
 
-								<Box my={3} mx={2} display='flex' alignItems='center' flexDirection='column'>
-									<Typography component='a' href='/' variant='subtitle2' gutterBottom>
-										Resend OTP Again
-									</Typography>
-									<Button variant='contained' color='primary' type='submit' fullWidth>
-										Verify via OTP
-									</Button>
-								</Box>
-							</Form>
-						)}
+									<Box my={3} mx={2} display='flex' alignItems='center' flexDirection='column'>
+										<Typography component='a' href='/' variant='subtitle2' gutterBottom>
+											Resend OTP Again
+										</Typography>
+										<Button
+											variant='contained'
+											color='primary'
+											type='submit'
+											fullWidth
+											ref={buttonRef}>
+											Verify via OTP
+										</Button>
+									</Box>
+								</Form>
+							);
+						}}
 					</Formik>
 				</Grid>
 			</Grid>

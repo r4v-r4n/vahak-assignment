@@ -13,3 +13,10 @@ export const initialBidDetails = {
 	isRateNegotiable: true,
 	getUpdates: true,
 };
+
+export const otpValues = {
+	firstDigit: '',
+	secondDigit: '',
+	thirdDigit: '',
+	fourthDigit: '',
+};
