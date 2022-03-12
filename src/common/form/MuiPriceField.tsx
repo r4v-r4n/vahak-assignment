@@ -16,7 +16,7 @@ const MuiPriceField = (props: MuiPriceFieldProps) => {
 				return (
 					<Box my={1} display='flex' justifyContent='center'>
 						<TextField
-							placeholder='0'
+							placeholder='000,000'
 							InputProps={{
 								startAdornment: (
 									<InputAdornment position='start' sx={{ fontSize: '3rem' }}>
